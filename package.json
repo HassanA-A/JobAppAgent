@@ -1,45 +1,35 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import AppShell from '@/components/layout/AppShell'
-import OverviewPage      from '@/components/pages/OverviewPage'
-import ModelsPage        from '@/components/pages/ModelsPage'
-import DockerPage        from '@/components/pages/DockerPage'
-import JobAgentPage      from '@/components/pages/JobAgentPage'
-import { LoadingSpinner } from '@/components/ui'
-
-// Placeholder pages for routes not yet built
-function PlaceholderPage({ title }: { title: string }) {
-  return (
-    <div className="p-6 max-w-screen-xl mx-auto animate-fade-in">
-      <div className="mb-5">
-        <h1 className="text-xl font-medium text-text-primary font-display">{title}</h1>
-        <p className="text-xs text-text-muted mt-0.5">This page is under construction.</p>
-      </div>
-      <div className="card p-8 flex flex-col items-center justify-center gap-3 border-dashed">
-        <div className="w-10 h-10 rounded-xl bg-bg-active flex items-center justify-center">
-          <span className="text-lg">🚧</span>
-        </div>
-        <p className="text-sm text-text-muted">Coming soon</p>
-      </div>
-    </div>
-  )
-}
-
-export default function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route element={<AppShell />}>
-          <Route path="/"               element={<OverviewPage />} />
-          <Route path="/models"         element={<ModelsPage />} />
-          <Route path="/docker"         element={<DockerPage />} />
-          <Route path="/infrastructure" element={<PlaceholderPage title="Infrastructure" />} />
-          <Route path="/agents"         element={<PlaceholderPage title="Agents" />} />
-          <Route path="/job-agent"      element={<JobAgentPage />} />
-          <Route path="/logs"           element={<PlaceholderPage title="Logs" />} />
-          <Route path="/settings"       element={<PlaceholderPage title="Settings" />} />
-          <Route path="*"               element={<Navigate to="/" replace />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
-  )
+{
+  "name": "jobagent",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "backend": "cd backend && source .venv/bin/activate && uvicorn main:app --reload --host 0.0.0.0 --port 8000",
+    "dev:all": "concurrently \"npm run backend\" \"npm run dev\""
+  },
+  "dependencies": {
+    "@tanstack/react-query": "latest",
+    "@supabase/supabase-js": "latest",
+    "@vitejs/plugin-react": "latest",
+    "clsx": "latest",
+    "concurrently": "latest",
+    "lucide-react": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-router-dom": "latest",
+    "recharts": "latest",
+    "typescript": "latest",
+    "vite": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "@types/react": "latest",
+    "@types/react-dom": "latest",
+    "autoprefixer": "latest",
+    "postcss": "latest",
+    "tailwindcss": "^3.4.17"
+  }
 }
